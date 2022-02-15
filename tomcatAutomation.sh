@@ -17,7 +17,7 @@ if [ "$(id -u)" == "0" ]; then
 	echo -e "\n [+] Adding username..."
 	sudo useradd -m -d /opt/tomcat -U -s /bin/false tomcat
 	echo -e "\n [+] Detecting wget in the system..."
-	wget
+	wget &>/dev/null
 	if [ "$(echo $?)" == "1" ]; then
 		echo -e "\n [+] Wget is in the system..."
 	else
@@ -31,7 +31,7 @@ if [ "$(id -u)" == "0" ]; then
 	tar xzf apache-tomcat-10*tar.gz -C /opt/tomcat --strip-components=1 &>/dev/null
 	echo -e "\n [+] You need to edit this files: /opt/tomcat/webapps/manager/META-INF/context.xml"
 	echo -e "\n [+] And this: /opt/tomcat/webapps/host-manager/META-INF/context.xml"
-	echo -e "\n [+] Comment the line contains the wird 'Valve'"
+	echo -e "\n [+] Comment the line contains the word 'Valve'"
 	echo -e "\n [+] Creating Tomcat systemd Unit..."
 	touch /etc/systemd/system/tomcat.service
 	echo """[Unit]
